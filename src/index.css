@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Brand Colors ─────────────────── */
+  --color-bg:           #F4F7F9;  /* page background */
+  --color-surface:      #FFFFFF;  /* card / panel surface */
+  --color-border:       #DDE2E8;  /* subtle borders */
+
+  --color-primary:      #0F9B77;  /* teal — CTA, active states */
+  --color-primary-lt:   #1DCDAA;  /* mint — progress, hover */
+  --color-primary-bg:   #E1F5EE;  /* teal tint — chip bg, badges */
+
+  --color-accent:       #E85D3B;  /* coral — wrong answer, alert */
+  --color-accent-bg:    #FAECE7;  /* coral tint — error bg */
+
+  --color-text:         #1A1A2E;  /* primary text */
+  --color-muted:        #5F6B7A;  /* secondary / hint text */
+
+  /* ── Semantic Feedback ────────────── */
+  --color-correct:      #0F9B77;  /* correct answer */
+  --color-wrong:        #E85D3B;  /* wrong answer */
+  --color-score:        #1DCDAA;  /* score highlight */
+
+  /* ── Difficulty Levels ────────────── */
+  --color-easy:         #0F9B77;  /* easy — teal */
+  --color-medium:       #F4A261;  /* medium — amber */
+  --color-hard:         #E85D3B;  /* hard — coral/red */
+
+  /* ── Typography ───────────────────── */
+  --font-display:       'Syne', sans-serif;
+  --font-body:          'DM Sans', sans-serif;
+
+  /* ── Radius ───────────────────────── */
+  --radius-sm:          6px;
+  --radius-md:          10px;
+  --radius-lg:          16px;
+  --radius-xl:          24px;
+}
+
+body {
+   font-family: "Nunito", sans-serif;
+}
