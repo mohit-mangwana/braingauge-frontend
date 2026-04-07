@@ -37,25 +37,34 @@ const StudentSignupForm = () => {
   };
 
   return (
-    <>
-     <div className="w-full flex items-center justify-center lg:justify-start mb-6">
-              <img
-                src={myLogo}
-                className="w-54 h-14 object-cover rounded-full"
-                alt="Logo"
-              />
-            </div>
-      <div className="w-full bg-blue-800">
-        <div className="lg:text-left md:text-center">
-          <h2 className="text-3xl font-bold mb-2 text-gray-800">
-           Let’s get you onboarded!
-          </h2>
-    <p className="mb-2 text-gray-500">Create your Qollabb account to begin your project journey.</p>
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-3 mt-4 lg:w-5xl bg-green-900"
-          >
-            <div className=" flex relative gap-8 justify-between items-center">
+  <>
+  {/* Logo */}
+  <div className="w-full flex items-center px-6 justify-center md:justify-start mb-6">
+    <img
+      src={myLogo}
+      className="w-50 h-12 object-cover rounded-full"
+      alt="Logo"
+    />
+  </div>
+
+  <div className="w-full px-6 flex justify-start">
+    <div className="w-full max-w-3xl">
+      <div className="text-left  ">
+        <h2 className="text-3xl font-bold mb-2 text-gray-800">
+          Let’s get you onboarded!
+        </h2>
+
+        <p className="mb-2 text-gray-500">
+          Create your Braingauge account to begin your project journey.
+        </p>
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4 mt-4"
+        >
+          {/* Full Name + Email */}
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex-1 min-w-0">
               <InputField
                 label="Full Name"
                 name="fullName"
@@ -65,9 +74,11 @@ const StudentSignupForm = () => {
                 placeholder="Enter your full name"
                 required
               />
+            </div>
 
+            <div className="flex-1 min-w-0">
               <InputField
-                label="Work/Official Email"
+                label="Email"
                 name="email"
                 type="email"
                 value={form.email}
@@ -76,8 +87,11 @@ const StudentSignupForm = () => {
                 required
               />
             </div>
+          </div>
 
-            <div className="flex relative justify-between items-center">
+          {/* Password + Phone */}
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex-1 min-w-0">
               <InputField
                 label="Password"
                 name="password"
@@ -96,7 +110,9 @@ const StudentSignupForm = () => {
                   </button>
                 }
               />
+            </div>
 
+            <div className="flex-1 min-w-0">
               <InputField
                 label="Phone Number"
                 name="phoneNumber"
@@ -107,51 +123,60 @@ const StudentSignupForm = () => {
                 required
               />
             </div>
+          </div>
 
-            <div className="flex relative justify-between items-center">
-              <InputField
-                label="Confirm Password"
-                name="confirmPassword"
-                type={showPass ? "text" : "password"}
-                value={form.confirmPassword}
-                onChange={handleChange}
-                placeholder="Confirm password"
-                required
-                rightElement={
-                  <button
-                    type="button"
-                    onClick={() => setShowPass(!showPass)}
-                    className="text-sm text-gray-500"
-                  >
-                    {showPass ? "Hide" : "Show"}
-                  </button>
-                }
-              />
-            </div>
+          {/* Confirm Password + Button */}
+        <div className="flex flex-col md:flex-row gap-6">
+  <div className="flex-1 min-w-0">
+    <InputField
+      label="Confirm Password"
+      name="confirmPassword"
+      type={showPass ? "text" : "password"}
+      value={form.confirmPassword}
+      onChange={handleChange}
+      placeholder="Confirm password"
+      required
+      rightElement={
+        <button
+          type="button"
+          onClick={() => setShowPass(!showPass)}
+          className="text-sm text-gray-500"
+        >
+          {showPass ? "Hide" : "Show"}
+        </button>
+      }
+    />
+  </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full mt-2 bg-[var(--color-primary)] text-white p-3 rounded-lg font-semibold"
-            >
-              {loading ? "Signing up..." : "Sign Up"}
-            </button>
+  {/*  Button now same width */}
+  <div className="flex-1 min-w-0 flex items-end">
+    <button
+      type="submit"
+      disabled={loading}
+      className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-lt)] cursor-pointer text-white p-3 rounded-lg font-semibold"
+    >
+      {loading ? "Signing up..." : "Sign Up"}
+    </button>
+  </div>
+</div>
 
-            <div className="text-center mt-2">
-              <p className="text-gray-600 text-sm">
-                Already a member ?{" "}
-                <a
-                  href="#"
-                  className="text-[var(--color-primary)] font-semibold hover:underline"
-                >
-                  Sign in
-                </a>
-              </p>
-            </div>
-          </form>
-        </div>
+          {/* Footer */}
+          <div className="text-center mt-2">
+            <p className="text-gray-600 text-sm">
+              Already a member?{" "}
+              <a
+                href="#"
+                className="text-[var(--color-primary)] font-semibold hover:underline"
+              >
+                Sign in
+              </a>
+            </p>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
+  </div>
+</>
   );
 };
 

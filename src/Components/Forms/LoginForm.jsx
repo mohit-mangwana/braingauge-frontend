@@ -79,7 +79,7 @@ const LoginForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 bg-[var(--color-primary)] text-white p-3 rounded-lg font-semibold"
+            className="w-full mt-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-lt)] shadow-lg cursor-pointer text-white p-3 rounded-lg transition font-semibold disabled:bg-[var(--color-primary)]"
           >
             {loading ? "Logging in..." : "Log In"}
           </button>

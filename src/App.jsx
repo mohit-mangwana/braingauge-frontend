@@ -3,6 +3,7 @@ import Login from './pages/LoginPage'
 import ForgotPassword from './pages/ForgotPassword' 
 import TeacherSignup from './pages/TeacherSignup'
 import StudentSignup from './pages/StudentSignup'
+import Onboard from './Components/ui/Onboard'
 import './App.css'
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
          <Route
           path="/signup/student"
           element={<StudentSignup />} // Cleaned up the unnecessary fragment
+        />
+         <Route
+          path="/onboard/student"
+          element={<Onboard />} // Cleaned up the unnecessary fragment
         />
 
         {/* Recommended: Add a default route so you don't see a blank page at "/" */}

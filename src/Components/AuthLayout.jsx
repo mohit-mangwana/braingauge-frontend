@@ -8,7 +8,7 @@ const AuthLayout = ({
   children,
 }) => {
   return (
-    <div className="min-h-screen bg-white flex items-start justify-center overflow-y-auto">
+    <div className="min-h-screen bg-[var(--color-bg)] flex items-start justify-center overflow-y-auto">
       <div
         className={`flex w-full max-w-7xl mx-auto p-4 ${
           showLeft ? "flex-col lg:flex-row gap-12 lg:gap-6" : "justify-center"
@@ -38,7 +38,7 @@ const AuthLayout = ({
               </h1>
 
               {description && (
-                <p className="w-full lg:w-3/4 mt-6 mb-6 text-lg text-gray-600">
+                <p className="w-full lg:w-3/4 mt-6 mb-6 text-lg  text-[var(--color-text)]">
                   {description}
                 </p>
               )}
@@ -65,7 +65,7 @@ const AuthLayout = ({
             showLeft ? "lg:w-1/2 lg:items-end" : "w-full"
           }`}
         >
-          <div className="w-full bg-green-800 lg:w-full p-6 bg-white rounded-lg shadow-xl border border-gray-200">
+          <div className="w-full lg:w-full p-6 bg-white rounded-lg shadow-xl border border-gray-200">
             {children}
           </div>
         </div>

@@ -42,7 +42,7 @@ const TeacherSignupForm = () => {
           </h2>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4 w-full">
-            <div className=" flex relative  gap-4 justify-between items-center">
+            <div className=" flex relative flex-col md:flex-row gap-4 justify-between items-center">
               <InputField
                 label="Full Name"
                 name="fullName"
@@ -64,7 +64,7 @@ const TeacherSignupForm = () => {
               />
             </div>
 
-            <div className="flex relative gap-4 justify-between items-center">
+            <div className="flex flex-col md:flex-row relative gap-4 justify-between items-center">
               <InputField
                 label="School Name"
                 name="schoolName"
@@ -98,7 +98,7 @@ const TeacherSignupForm = () => {
     />
 </div>
 
-            <div className="flex relative gap-4 justify-between items-center">
+            <div className="flex flex-col md:flex-row relative gap-4 justify-between items-center">
               <InputField
                 label="Password"
                 name="password"
@@ -141,7 +141,7 @@ const TeacherSignupForm = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 bg-[var(--color-primary)] text-white p-3 rounded-lg font-semibold"
+              className="w-full mt-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-lt)] cursor-pointer text-white p-3 rounded-lg font-semibold"
             >
               {loading ? "Signing up..." : "Sign Up"}
             </button>

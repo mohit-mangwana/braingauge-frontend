@@ -27,7 +27,7 @@ const InputField = ({
           onChange={onChange}
           placeholder={placeholder}
           required={required}
-          className="w-full p-3 border bg-blue-50 border-gray-300 rounded-lg 
+          className="w-full p-3 border bg-[var(--color-primary-bg)] border-[var(--color-border)] rounded-lg 
                      focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] 
                      focus:shadow-lg"
         />
