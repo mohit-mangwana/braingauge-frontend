@@ -4,6 +4,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import TeacherSignup from './pages/TeacherSignup'
 import StudentSignup from './pages/StudentSignup'
 import Onboard from './Components/ui/Onboard'
+import Signup from './pages/Signup'
 import './App.css'
 
 function App() {
@@ -13,23 +14,27 @@ function App() {
       <Routes>
         <Route
           path="/login"
-          element={<Login />} // Cleaned up the unnecessary fragment
+          element={<Login />} 
         />
          <Route
             path="/forgot-password"
-            element={<ForgotPassword />} // Cleaned up the unnecessary fragment
+            element={<ForgotPassword />} 
           />
           <Route
           path="/signup/teacher"
-          element={<TeacherSignup />} // Cleaned up the unnecessary fragment
+          element={<TeacherSignup />} 
         />
          <Route
           path="/signup/student"
-          element={<StudentSignup />} // Cleaned up the unnecessary fragment
+          element={<StudentSignup />} 
         />
          <Route
           path="/onboard/student"
-          element={<Onboard />} // Cleaned up the unnecessary fragment
+          element={<Onboard />} 
+        />
+        <Route
+          path="/signup"
+          element={<Signup />} 
         />
 
         {/* Recommended: Add a default route so you don't see a blank page at "/" */}

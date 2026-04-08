@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputField from "../InputFields";
 import myLogo from "../../assets/high-resolution-color-logo (2).png";
+import { Link } from "react-router-dom";
 
 
 
@@ -164,12 +165,12 @@ const StudentSignupForm = () => {
           <div className="text-center mt-2">
             <p className="text-gray-600 text-sm">
               Already a member?{" "}
-              <a
-                href="#"
+              <Link
+                to="/login"
                 className="text-[var(--color-primary)] font-semibold hover:underline"
               >
                 Sign in
-              </a>
+              </Link>
             </p>
           </div>
         </form>

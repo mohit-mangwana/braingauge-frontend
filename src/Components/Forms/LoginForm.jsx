@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputField from "../InputFields";
+import {Link} from "react-router-dom";
 
 const LoginForm = () => {
   const [form, setForm] = useState({
@@ -69,12 +70,12 @@ const LoginForm = () => {
               }
             />
 
-            <a
+            <Link
               href="#"
               className="absolute right-0 top-0 text-sm text-[var(--color-primary)] hover:underline"
             >
               Forgot password?
-            </a>
+            </Link>
           </div>
           <button
             type="submit"
@@ -122,19 +123,19 @@ const LoginForm = () => {
               Do not have an account? Sign Up as
             </p>
             <div className="flex justify-center gap-4 mt-2">
-              <a
-                href="#"
+              <Link
+                to="/onboard/student"
                 className="text-[var(--color-primary)] font-semibold hover:underline"
               >
                 Student
-              </a>
+              </Link>
               <span className="text-gray-300">|</span>
-              <a
-                href="#"
+              <Link
+                to="/signup/teacher"
                 className="text-[var(--color-primary)] font-semibold hover:underline"
               >
                 Teacher
-              </a>
+              </Link>
             </div>
             <div className="w-full mt-2 text-center text-gray-500 text-sm pointer-events-none">
               &copy; {new Date().getFullYear()} Braingauge. All rights reserved.

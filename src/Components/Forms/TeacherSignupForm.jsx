@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputField from "../InputFields";
+import { Link } from "react-router-dom";
 
 const TeacherSignupForm = () => {
   const [form, setForm] = useState({
@@ -150,12 +151,12 @@ const TeacherSignupForm = () => {
 
             <div className="text-center mt-2">
               <p className="text-gray-600 text-sm">
-                Already a member ?  <a
-                    href="#"
+                Already a member ?  <Link
+                    to="/login"
                     className="text-[var(--color-primary)] font-semibold hover:underline"
                   >
                     Sign in
-                  </a>
+                  </Link>
               </p>             
             </div>
           </form>

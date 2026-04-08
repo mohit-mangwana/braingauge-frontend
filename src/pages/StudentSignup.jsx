@@ -1,21 +1,20 @@
-import React from 'react'
-import AuthLayout from '../Components/AuthLayout'
-import StudentSignupForm from '../Components/Forms/StudentSignupForm'
-import { Helmet } from 'react-helmet-async';
+import StudentSignupForm from "../Components/Forms/StudentSignupForm";
+import AuthLayout from "../Components/AuthLayout";
+import { Helmet } from "react-helmet-async";
 
 export default function StudentSignup() {
   return (
-    <div>
-    <Helmet>
-        <title>Sign Up to Braingauge</title>
-        <meta name="description" content="Create your account on Qollabb" />
+    <>
+      <Helmet>
+        <title>Sign Up to Braingauge | Student Account</title>
+        <meta name="description" content="Create your account on Brainguage" />
       </Helmet>
-       <AuthLayout
-    //   logo={myLogo}
-      showLeft={false}
-    >
-      <StudentSignupForm />
-    </AuthLayout>
-    </div>
-  )
+
+      <AuthLayout
+        showLeft={false}
+      >
+        <StudentSignupForm/>
+      </AuthLayout>
+    </>
+  );
 }

@@ -10,8 +10,8 @@ const AuthLayout = ({
   return (
     <div className="min-h-screen bg-[var(--color-bg)] flex items-start justify-center overflow-y-auto">
       <div
-        className={`flex w-full max-w-7xl mx-auto p-4 ${
-          showLeft ? "flex-col lg:flex-row gap-12 lg:gap-6" : "justify-center"
+        className={`flex w-full max-w-7xl mx-auto p-4 md:px-8 lg:px-6 ${
+          showLeft ? "flex-col lg:flex-row gap-4 lg:gap-6" : "justify-center"
         }`}
       >
         {/* LEFT SECTION */}

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import myLogo from "../../assets/high-resolution-color-logo (2).png";
+import {Helmet} from "react-helmet-async";
 
 const features = [
   {
@@ -14,20 +15,15 @@ const features = [
 ];
 
 const Onboard = () => {
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    // simulate API
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
+  
+  const navigate = useNavigate();
 
   return (
     <>
+    <Helmet>
+        <title>Welcome to Braingauge</title>
+        <meta name="description" content="Discover the future of learning with our AI-powered quizzes." />
+    </Helmet>
       <div className="min-h-screen overflow-hidden bg-[var(--color-bg)] relative flex items-start justify-center p-6 md:px-16">
         <div className=" bg-[var(--color-surface)] shadow-xl border border-[var(--color-border)] rounded-xl flex flex-col items-start justify-center w-full h-full p-3 md:py-8 md:px-12">
           <div className="content-section text-start p-3">
@@ -72,12 +68,11 @@ const Onboard = () => {
 
             <div className="mt-12">
               <button
-                type="submit"
-                disabled={loading}
-                onClick={() => handleSubmit()}
+                type="button"
+                onClick={() => navigate("/signup/student")}
                 className=" mt-4 bg-[var(--color-primary)] shadow-lg text-white p-3 px-6 rounded-md cursor-pointer hover:bg-[var(--color-primary-lt)] transition font-semibold disabled:bg-[var(--color-primary)]"
               >
-                {loading ? "Initializing..." : "Let's Start"}
+                 Let's Start
               </button>
             </div>
           </div>
