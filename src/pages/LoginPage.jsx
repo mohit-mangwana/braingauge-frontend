@@ -1,6 +1,7 @@
 import AuthLayout from "../Components/AuthLayout";
 import LoginForm from "../Components/Forms/LoginForm";
 import myLogo from "../assets/high-resolution-color-logo (2).png";
+import {Helmet} from "react-helmet-async";
 
 const features = [
   {
@@ -20,7 +21,12 @@ const features = [
 export default function Login() {
 
   return (
-    
+    <>
+    <Helmet>
+        <title>Login to Braingauge</title>
+        <meta name="description" content="Login to your Braingauge account" />
+      </Helmet>
+
      <AuthLayout
       logo={myLogo}
       title="Test Your Mind."
@@ -30,6 +36,7 @@ export default function Login() {
     >
       <LoginForm />
     </AuthLayout>
+    </>
     // <div className="min-h-screen overflow-hidden bg-white relative flex items-center justify-center">
     //   <div className="flex flex-col lg:flex-row w-full max-w-7xl mx-auto gap-12 lg:gap-0 p-4 md:p-4">
     //     <div className="w-full lg:w-1/2 flex flex-col items-start  left-logging">

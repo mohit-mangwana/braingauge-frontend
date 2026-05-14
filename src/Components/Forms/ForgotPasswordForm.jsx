@@ -1,5 +1,7 @@
 import { useState } from "react";
 import InputField from "../InputFields";
+import { Link } from "react-router-dom";
+import {Helmet} from "react-helmet-async";
 
 const ForgotPasswordForm = () => {
   const [form, setForm] = useState({
@@ -29,6 +31,10 @@ const ForgotPasswordForm = () => {
 
   return (
     <>
+    <Helmet>
+        <title>Forgot Password - Braingauge</title>
+        <meta name="description" content="Reset your Braingauge password by entering your email address. We'll send you instructions to regain access to your account." />
+    </Helmet>
       <h2 className="text-3xl font-bold mb-2 text-gray-800">
         Forgot Password?
       </h2>
@@ -51,17 +57,17 @@ const ForgotPasswordForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full mt-2 bg-[var(--color-primary)] text-white p-3 rounded-lg font-semibold"
+          className="w-full mt-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-lt)] shadow-lg cursor-pointer text-white p-3 rounded-lg font-semibold"
         >
           {loading ? "Sending instructions..." : "Send Instructions"}
         </button>
         <div className="p-2 text-center">
-          <a
-            href="#"
+          <Link
+            to="/login"
             className="text-[var(--color-primary)] font-semibold hover:underline"
           >
             Back to Login
-          </a>
+          </Link>
         </div>
 
         <div className="w-full mt-2 text-center text-gray-500 text-sm pointer-events-none">

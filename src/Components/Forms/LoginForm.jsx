@@ -1,7 +1,18 @@
 import { useState } from "react";
 import InputField from "../InputFields";
+import { Link } from "react-router-dom";
+// import client from "../../api/client";
+import { getErrorMessage } from "../../api/client";
+import { useNavigate, useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginForm = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [error, setError] = useState("");
+  // const from = location.state?.from?.pathname;
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -17,21 +28,87 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+    if (!form.email || !form.password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    const loadingToast = toast.loading("Authenticating...");
     setLoading(true);
-
-    console.log("Form Data:", form);
-
-    // simulate API
-    setTimeout(() => {
+    setError("");
+    try {
+      const response = await login(form.email, form.password);
+      toast.success(`Welcome back, ${response.name}!`, {
+        id: loadingToast,
+      });
+      const role = response?.user?.role || response?.role;
+      console.log(role);
+    navigate("/", { replace: true });
+      //  navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Please Check Credentials",
+        { id: loadingToast },
+      );
+      setError(getErrorMessage(err));
+    } finally {
       setLoading(false);
-    }, 1000);
-  };
+    }
+  }
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const loadingToast = toast.loading("Authenticating...");
+
+  //   try {
+  //     setLoading(true);
+
+  //     const response = await client.post("/auth/login", form);
+
+  //     console.log(response.data);
+
+  //     // Store token
+  //     localStorage.setItem("token", response.data.token);
+
+  //     // Store user
+  //     localStorage.setItem("user", JSON.stringify(response.data.user));
+
+  //     const role = response.data.user.role;
+
+  //     // Redirect according to role
+  //     if (role === "teacher") {
+  //       if (response.data.success) {
+  //         console.log(response.data);
+  //         toast.success(`Welcome back, ${response.data.user.name}!`, {
+  //           id: loadingToast,
+  //         });
+  //         navigate("/dashboard");
+  //       }
+  //     } else {
+  //       if (response.data.success) {
+  //         console.log(response.data);
+  //         toast.success(`Welcome back, ${response.data.user.name}!`, {
+  //           id: loadingToast,
+  //         });
+  //         navigate("/dashboard");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     const message =
+  //       error.response?.data?.message || "Login failed. Please try again.";
+  //     toast.error(message, { id: loadingToast });
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <>
-    
       <div className="lg:text-left md:text-center">
         <h2 className="text-3xl font-bold mb-2 text-gray-800">Login</h2>
         <p className="mb-2 text-gray-500">
@@ -69,17 +146,17 @@ const LoginForm = () => {
               }
             />
 
-            <a
-              href="#"
+            {/* <Link
+              to="/forgot-password"
               className="absolute right-0 top-0 text-sm text-[var(--color-primary)] hover:underline"
             >
               Forgot password?
-            </a>
+            </Link> */}
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 bg-[var(--color-primary)] text-white p-3 rounded-lg font-semibold"
+            className="w-full mt-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-lt)] shadow-lg cursor-pointer text-white p-3 rounded-lg transition font-semibold disabled:bg-[var(--color-primary)]"
           >
             {loading ? "Logging in..." : "Log In"}
           </button>
@@ -122,19 +199,19 @@ const LoginForm = () => {
               Do not have an account? Sign Up as
             </p>
             <div className="flex justify-center gap-4 mt-2">
-              <a
-                href="#"
+              <Link
+                to="/onboard/student"
                 className="text-[var(--color-primary)] font-semibold hover:underline"
               >
                 Student
-              </a>
+              </Link>
               <span className="text-gray-300">|</span>
-              <a
-                href="#"
+              <Link
+                to="/signup/teacher"
                 className="text-[var(--color-primary)] font-semibold hover:underline"
               >
                 Teacher
-              </a>
+              </Link>
             </div>
             <div className="w-full mt-2 text-center text-gray-500 text-sm pointer-events-none">
               &copy; {new Date().getFullYear()} Braingauge. All rights reserved.

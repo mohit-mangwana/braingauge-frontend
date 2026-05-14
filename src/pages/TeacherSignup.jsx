@@ -1,7 +1,7 @@
-import React from 'react'
 import TeacherSignupForm from '../Components/Forms/TeacherSignupForm';
 import AuthLayout from '../Components/AuthLayout'
 import myLogo from "../assets/high-resolution-color-logo (2).png";
+import { Helmet } from 'react-helmet-async';
 
 const features = [
   {
@@ -20,7 +20,11 @@ const features = [
 
 export default function TeacherSignup() {
   return (
-    <div>
+    <>
+    <Helmet>
+        <title>Sign Up to Braingauge | Teacher Account</title>
+        <meta name="description" content="Create your account on Brainguage" />
+      </Helmet> 
      <AuthLayout
       logo={myLogo}
       title="Join Our Community"
@@ -30,6 +34,6 @@ export default function TeacherSignup() {
     >
       <TeacherSignupForm />
     </AuthLayout>
-    </div>
+    </>
   )
 }
