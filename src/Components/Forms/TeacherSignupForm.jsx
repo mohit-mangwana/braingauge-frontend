@@ -1,38 +1,83 @@
 import { useState } from "react";
 import InputField from "../InputFields";
 import { Link } from "react-router-dom";
+// import client from "../../api/client";
+import { authAPI } from "../../api/services";
+import { useNavigate } from "react-router-dom";
+import useForm from "../../Utils/UseForm";
+import { validateSignup } from "../../Utils/Validations";
+import toast from "react-hot-toast";
 
 const TeacherSignupForm = () => {
-  const [form, setForm] = useState({
+  const initialValues = {
     fullName: "",
     email: "",
-    schoolName: "",
+    institution: "",
+    department: "",
     designation: "",
+    employeeId: "",
     phoneNumber: "",
     password: "",
     confirmPassword: "",
-  });
+  };
+
+  const navigate = useNavigate();
 
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const onSubmit = async (data) => {
+    const loadingToast = toast.loading("Creating account...");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    console.log("Form Data:", form);
+    try {
+      setLoading(true);
 
-    // simulate API
-    setTimeout(() => {
+      const payload = {
+        name: data.fullName,
+        email: data.email,
+        password: data.password,
+        phone: data.phoneNumber,
+
+        role: "teacher",
+
+        institution: data.institution,
+        department: data.department,
+        designation: data.designation,
+        employeeId: data.employeeId,
+
+        // optional
+        subjects: data.subjects || [],
+      };
+
+      const response = await authAPI.register(payload);
+
+      console.log(response);
+
+      if (response.success) {
+        toast.success("Account created successfully!", {
+          id: loadingToast,
+        });
+
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Signup failed. Please try again.";
+
+      toast.error(message, {
+        id: loadingToast,
+      });
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
+
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useForm(initialValues, validateSignup, onSubmit);
 
   return (
     <>
@@ -42,13 +87,20 @@ const TeacherSignupForm = () => {
             Signup as an Teacher
           </h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4 w-full">
-            <div className=" flex relative flex-col md:flex-row gap-4 justify-between items-center">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-3 mt-4 w-full"
+          >
+            {/* Name + Email */}
+            <div className="flex relative flex-col md:flex-row gap-4 justify-between items-center">
               <InputField
                 label="Full Name"
                 name="fullName"
                 type="text"
-                value={form.fullName}
+                value={values.fullName}
+                onBlur={handleBlur}
+                error={errors.fullName}
+                touched={touched.fullName}
                 onChange={handleChange}
                 placeholder="Enter your full name"
                 required
@@ -58,54 +110,100 @@ const TeacherSignupForm = () => {
                 label="Work/Official Email"
                 name="email"
                 type="email"
-                value={form.email}
+                value={values.email}
+                onBlur={handleBlur}
+                error={errors.email}
+                touched={touched.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
                 required
               />
             </div>
 
+            {/* Institution + Department */}
             <div className="flex flex-col md:flex-row relative gap-4 justify-between items-center">
               <InputField
-                label="School Name"
-                name="schoolName"
+                label="Institution"
+                name="institution"
                 type="text"
-                value={form.schoolName}
+                value={values.institution}
+                onBlur={handleBlur}
+                error={errors.institution}
+                touched={touched.institution}
                 onChange={handleChange}
-                placeholder="Enter your school name"
+                placeholder="Enter your institution name"
                 required
               />
 
               <InputField
-                label="Designation"
-                name="designation"
+                label="Department"
+                name="department"
                 type="text"
-                value={form.designation}
+                value={values.department}
+                onBlur={handleBlur}
+                error={errors.department}
+                touched={touched.department}
                 onChange={handleChange}
-                placeholder="Enter your designation"
+                placeholder="Enter your department"
                 required
               />
             </div>
 
-<div>
-    <InputField
-      label="Phone Number"
-      name="phoneNumber"
-      type="number"
-      value={form.phoneNumber}
-      onChange={handleChange}
-      placeholder="Enter your phone number"
-      required
-    />
-</div>
+            {/* Designation + Employee ID */}
+            <div className="flex flex-col md:flex-row relative gap-4 justify-between items-center">
+              <InputField
+                label="Designation"
+                name="designation"
+                type="text"
+                value={values.designation}
+                onBlur={handleBlur}
+                error={errors.designation}
+                touched={touched.designation}
+                onChange={handleChange}
+                placeholder="Enter your designation"
+                required
+              />
 
+              <InputField
+                label="Employee ID"
+                name="employeeId"
+                type="text"
+                value={values.employeeId}
+                onBlur={handleBlur}
+                error={errors.employeeId}
+                touched={touched.employeeId}
+                onChange={handleChange}
+                placeholder="Enter employee ID (optional)"
+              />
+            </div>
+
+            {/* Phone */}
+            <div>
+              <InputField
+                label="Phone Number"
+                name="phone"
+                type="text"
+                value={values.phone}
+                onBlur={handleBlur}
+                error={errors.phoneNumber}
+                touched={touched.phoneNumber}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+
+            {/* Password */}
             <div className="flex flex-col md:flex-row relative gap-4 justify-between items-center">
               <InputField
                 label="Password"
                 name="password"
                 type={showPass ? "text" : "password"}
-                value={form.password}
+                value={values.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.password}
+                touched={touched.password}
                 placeholder="Enter your password"
                 required
                 rightElement={
@@ -123,7 +221,10 @@ const TeacherSignupForm = () => {
                 label="Confirm Password"
                 name="confirmPassword"
                 type={showPass ? "text" : "password"}
-                value={form.confirmPassword}
+                value={values.confirmPassword}
+                onBlur={handleBlur}
+                error={errors.confirmPassword}
+                touched={touched.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm password"
                 required
@@ -139,6 +240,7 @@ const TeacherSignupForm = () => {
               />
             </div>
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
@@ -147,17 +249,17 @@ const TeacherSignupForm = () => {
               {loading ? "Signing up..." : "Sign Up"}
             </button>
 
-           
-
+            {/* Login link */}
             <div className="text-center mt-2">
               <p className="text-gray-600 text-sm">
-                Already a member ?  <Link
-                    to="/login"
-                    className="text-[var(--color-primary)] font-semibold hover:underline"
-                  >
-                    Sign in
-                  </Link>
-              </p>             
+                Already a member?{" "}
+                <Link
+                  to="/login"
+                  className="text-[var(--color-primary)] font-semibold hover:underline"
+                >
+                  Sign in
+                </Link>
+              </p>
             </div>
           </form>
         </div>

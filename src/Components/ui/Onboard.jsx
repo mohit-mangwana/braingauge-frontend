@@ -34,7 +34,7 @@ const Onboard = () => {
               className="w-46 h-14 md:w-64 object-cover rounded-full mb-6"
             />
           </div> 
-            <h1 className="text-2xl md:text-3xl font-bold mb-4">
+            <h1 className="text-xl md:text-3xl font-bold mb-4">
               👋🏻 Welcome to Braingauge!
             </h1>
             <p className="text-lg mb-4">
@@ -51,15 +51,15 @@ const Onboard = () => {
             )}
 
             <div className="text-center mt-2">
-              <div className="flex justify-start gap-2 mt-4">
+              <div className="flex justify-start items-center gap-2 mt-4">
                 <p className="text-[var(--color-primary)] font-semibold">
                   Real Challenges
                 </p>
-                <span className="text-gray-300">|</span>
+                <span className="text-3xl md:text-base text-gray-300 leading-tight">|</span>
                 <p className="text-[var(--color-primary)] font-semibold">
                   Real Insights
                 </p>
-                <span className="text-gray-300">|</span>
+                <span className="text-3xl md:text-base text-gray-300 leading-tight">|</span>
                 <p className="text-[var(--color-primary)] font-semibold">
                   Real Growth
                 </p>

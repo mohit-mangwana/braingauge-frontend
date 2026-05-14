@@ -65,7 +65,7 @@ const AuthLayout = ({
             showLeft ? "lg:w-1/2 lg:items-end" : "w-full"
           }`}
         >
-          <div className="w-full lg:w-full p-6 bg-white rounded-lg shadow-xl border border-gray-200">
+          <div className="w-full lg:w-full p-4 md:p-6 bg-white rounded-lg shadow-xl border border-gray-200">
             {children}
           </div>
         </div>
